@@ -1,0 +1,3 @@
+http_proxy http://proxy.noc.titech.ac.jp:3128
+https_proxy http://proxy.noc.titech.ac.jp:3128
+no_proxy wlanauth.noc.titech.ac.jp
