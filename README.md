@@ -7,6 +7,11 @@ This read current SSID from Airport and export proxy settings from .{SSID}.
 
 ### How to use
 
+Next two statements should be written on .yourshrc
+
+	export PATH=/path/to/this/:$PATH
+	. exproxy
+
 .default_proxy and default_proxy.fnc are functions for default-setting.
 
 .{SSID} is {SSID}'s proxy settings list.
@@ -18,3 +23,4 @@ This read current SSID from Airport and export proxy settings from .{SSID}.
 {SSID}.fnc must implement 'post_export' function.
 
       (eg... use 'curl' for login.)
+      It can be empty function if you would like to do nothing.
