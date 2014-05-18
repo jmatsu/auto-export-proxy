@@ -30,7 +30,9 @@ Next statement should be written on .yourshrc
 	
 	[ -f ~/auto-export-proxy.sh ] && source ~/auto-export-proxy.sh
 
-### Extension
+#### ./build must be executed when you add new ssid's settings.
+
+### For extension
 
 settings/{SSID} is {SSID}'s proxy settings list.
 
