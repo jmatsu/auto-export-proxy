@@ -1,0 +1,61 @@
+#!/usr/bin/env bash -x
+
+function insert_new_line()
+{
+	echo -e "\n">>auto-export-proxy.sh
+}
+
+function gen_export_proxy()
+{
+	if [ "$1" = "no_proxy" ]; then
+		COUNT_NO_PROXY=`echo $no_proxy | grep "$2" | wc -w`
+		if [ $COUNT_NO_PROXY -eq 0 ]; then
+			temp_no_proxy="$no_proxy, $2"
+    		echo "export no_proxy='$temp_no_proxy'"
+		fi
+	else
+		echo "export $1=$2"
+	fi
+}
+
+echo "#!/usr/bin/env bash" >auto-export-proxy.sh
+
+insert_new_line
+
+cat ./defaults/public.fnc>>auto-export-proxy.sh
+
+insert_new_line
+
+FUNC_LIST=`ls -1 ./functions`
+
+# insert functions>>auto-export-proxy.sh
+for FUNC in $FUNC_LIST; do
+	CONTENT=`cat ./functions/${FUNC}`
+	echo "${FUNC%.*}_${CONTENT}">>auto-export-proxy.sh
+
+	insert_new_line
+done
+
+PROXY_LIST=`ls -1 ./settings`
+
+for PROXY in $PROXY_LIST; do
+	FILENAME="./settings/${PROXY}"
+
+	if [ -f $FILENAME ]; then
+		echo "export_${PROXY}()">>auto-export-proxy.sh
+		echo "{">>auto-export-proxy.sh
+
+		while read line; do
+			read param value <<<${line}
+			gen_export_proxy ${param} ${value}>>auto-export-proxy.sh
+		done < $FILENAME
+
+		echo "}">>auto-export-proxy.sh
+	fi
+
+	insert_new_line
+done
+
+cat ./defaults/main.fnc>>auto-export-proxy.sh
+
+cp -a ./auto-export-proxy.sh ~/auto-export-proxy.sh
