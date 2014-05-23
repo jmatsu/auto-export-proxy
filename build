@@ -26,7 +26,7 @@ cat ./defaults/public.fnc>>auto-export-proxy.sh
 
 insert_new_line
 
-FUNC_LIST=`ls -1 ./functions`
+FUNC_LIST=`ls -1 ./functions | grep .fnc`
 
 # insert functions>>auto-export-proxy.sh
 for FUNC in $FUNC_LIST; do
@@ -36,13 +36,13 @@ for FUNC in $FUNC_LIST; do
 	insert_new_line
 done
 
-PROXY_LIST=`ls -1 ./settings`
+PROXY_LIST=`ls -1 ./settings | grep .settings`
 
 for PROXY in $PROXY_LIST; do
 	FILENAME="./settings/${PROXY}"
 
 	if [ -f $FILENAME ]; then
-		echo "export_${PROXY}()">>auto-export-proxy.sh
+		echo "export_${PROXY%.*}()">>auto-export-proxy.sh
 		echo "{">>auto-export-proxy.sh
 
 		while read line; do
