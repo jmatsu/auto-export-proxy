@@ -27,7 +27,6 @@ Airportを使って現在のSSIDを読み取り、予め入力しておいたpro
 		* titech-pubnet.settings (titech-pubnetのプロキシ設定)
 
 
-
 ### 使い方
 
 1. $ cd /path/to/auto-export-proxy
@@ -42,7 +41,7 @@ Airportを使って現在のSSIDを読み取り、予め入力しておいたpro
 
 ### 機能拡張
 
-settings/{SSID}はテンプレを見ると分かると思いますが、プロキシ設定がリスト化されています
+settings/{SSID}.settingsはテンプレを見ると分かると思いますが、プロキシ設定がリスト化されています
 
         http_proxy {proxy:port} [RET]
         https_proxy {proxy:port} [RET]

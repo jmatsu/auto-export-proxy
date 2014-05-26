@@ -19,7 +19,7 @@ This read current SSID from Airport and export proxy settings from {SSID}.
 		* titech-pubnet.fnc (functions for titech-pubnet)
 	- resources
 		* defaults.resource (shared resource. eg... the name of default network enviroment)
-		* unique.resource (unique resource.)
+		* unique.resource (unique resource. eg... your variables.)
 	- settings
 		* settings_templete (templete for proxy settings.)
 		* default_proxy.settings (default proxy settings.)
@@ -39,7 +39,7 @@ Next statement should be written on .yourshrc
 
 ### For extension
 
-settings/{SSID} is {SSID}'s proxy settings list. (Show templete)
+settings/{SSID}.settings is {SSID}'s proxy settings list. (Show templete)
 
         http_proxy {proxy:port} [RET]
         https_proxy {proxy:port} [RET]
