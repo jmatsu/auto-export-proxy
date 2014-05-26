@@ -31,7 +31,7 @@ Airportを使って現在のSSIDを読み取り、予め入力しておいたpro
 
 東工大生ならネットワーク環境の生成といくつかの修正が必要
 
-1. titech-pubnet用のネットワーク環境の生成
+1. titech-pubnet用のネットワーク環境の生成(https://gist.github.com/jmatsu/99ebc9b8707b5277de1e)
 1. $ cd /path/to/auto-export-proxy
 1. $ $EDITOR resources/unique.resource
 
