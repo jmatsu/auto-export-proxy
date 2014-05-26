@@ -27,9 +27,9 @@ This read current SSID from Airport and export proxy settings from {SSID}.
 
 ### How to use
 
-If you are a student of Tokyo Institute of Technology and would like to use this, this require a network enviroment and to modify some statements in resources/unique.resource.
+If you are a student of Tokyo Institute of Technology and would like to use this, this require a network environment and to modify some statements in resources/unique.resource.
 
-1. Create a network enviroment for titech-pubnet.
+1. Create a network environment for titech-pubnet.
 1. $ cd /path/to/auto-export-proxy
 1. $ $EDITOR resources/unique.resource
 
