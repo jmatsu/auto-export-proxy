@@ -1,8 +1,10 @@
 #!/usr/bin/env bash -x
 
+OUTPUT_FILE_NAME=auto-export-proxy.sh
+
 function insert_new_line()
 {
-	echo -e "\n">>auto-export-proxy.sh
+	echo -e "\n">>$OUTPUT_FILE_NAME
 }
 
 function gen_export_proxy()
@@ -18,44 +20,57 @@ function gen_export_proxy()
 	fi
 }
 
-echo "#!/usr/bin/env bash" >auto-export-proxy.sh
+echo "#!/usr/bin/env bash" >$OUTPUT_FILE_NAME
 
 insert_new_line
 
-cat ./defaults/public.fnc>>auto-export-proxy.sh
+# insert shared and unique resources >>$OUTPUT_FILE_NAME
+RES_LIST=`ls -1 ./resources | grep .resource`
 
+for RES in RES_LIST; do
+	cat $RES>>$OUTPUT_FILE_NAME
+	insert_new_line
+done
+
+# insert shared functions>>$OUTPUT_FILE_NAME
+
+cat ./defaults/public.fnc>>$OUTPUT_FILE_NAME
 insert_new_line
 
-FUNC_LIST=`ls -1 ./functions`
 
-# insert functions>>auto-export-proxy.sh
+FUNC_LIST=`ls -1 ./functions | grep .fnc`
+
+# insert functions>>$OUTPUT_FILE_NAME
 for FUNC in $FUNC_LIST; do
 	CONTENT=`cat ./functions/${FUNC}`
-	echo "${FUNC%.*}_${CONTENT}">>auto-export-proxy.sh
+	echo "${FUNC%.*}_${CONTENT}">>$OUTPUT_FILE_NAME
 
 	insert_new_line
 done
 
-PROXY_LIST=`ls -1 ./settings`
+PROXY_LIST=`ls -1 ./settings | grep .settings`
 
+# insert settings>>$OUTPUT_FILE_NAME
 for PROXY in $PROXY_LIST; do
 	FILENAME="./settings/${PROXY}"
 
 	if [ -f $FILENAME ]; then
-		echo "export_${PROXY}()">>auto-export-proxy.sh
-		echo "{">>auto-export-proxy.sh
+		# insert method declaretion
+		echo "export_${PROXY%.*}()">>$OUTPUT_FILE_NAME
+		echo "{">>$OUTPUT_FILE_NAME
 
 		while read line; do
 			read param value <<<${line}
-			gen_export_proxy ${param} ${value}>>auto-export-proxy.sh
+			gen_export_proxy ${param} ${value}>>$OUTPUT_FILE_NAME
 		done < $FILENAME
 
-		echo "}">>auto-export-proxy.sh
+		echo "}">>$OUTPUT_FILE_NAME
 	fi
 
 	insert_new_line
 done
 
-cat ./defaults/main.fnc>>auto-export-proxy.sh
+# insert main function >>$OUTPUT_FILE_NAME
+cat ./defaults/main.fnc>>$OUTPUT_FILE_NAME
 
-cp -a ./auto-export-proxy.sh ~/auto-export-proxy.sh
+cp -a ./$OUTPUT_FILE_NAME ~/$OUTPUT_FILE_NAME # copy to /home/
