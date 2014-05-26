@@ -27,8 +27,8 @@ insert_new_line
 # insert shared and unique resources >>$OUTPUT_FILE_NAME
 RES_LIST=`ls -1 ./resources | grep .resource`
 
-for RES in RES_LIST; do
-	cat $RES>>$OUTPUT_FILE_NAME
+for RES in $RES_LIST; do
+	cat ./resources/$RES>>$OUTPUT_FILE_NAME
 	insert_new_line
 done
 
@@ -43,7 +43,10 @@ FUNC_LIST=`ls -1 ./functions | grep .fnc`
 # insert functions>>$OUTPUT_FILE_NAME
 for FUNC in $FUNC_LIST; do
 	CONTENT=`cat ./functions/${FUNC}`
-	echo "${FUNC%.*}_${CONTENT}">>$OUTPUT_FILE_NAME
+
+	STORED_SSID_REPLACED=`echo ${FUNC%.*} | sed -e 's/-/_/g'`
+
+	echo "${STORED_SSID_REPLACED}_${CONTENT}">>$OUTPUT_FILE_NAME
 
 	insert_new_line
 done
@@ -55,8 +58,10 @@ for PROXY in $PROXY_LIST; do
 	FILENAME="./settings/${PROXY}"
 
 	if [ -f $FILENAME ]; then
+		STORED_SSID_REPLACED=`echo ${PROXY%.*} | sed -e 's/-/_/g'`
+
 		# insert method declaretion
-		echo "export_${PROXY%.*}()">>$OUTPUT_FILE_NAME
+		echo "export_${STORED_SSID_REPLACED}()">>$OUTPUT_FILE_NAME
 		echo "{">>$OUTPUT_FILE_NAME
 
 		while read line; do
