@@ -5,7 +5,7 @@ post_export()
     # login
     CURL_RESULT=$(curl $TP_LOGIN_URL -X POST -d buttonClicked=4 -d "username=${TITECH_STUDENT_ID}&password=${TITECH_PASSWORD}" 2>&1)
     # parse 
-    STATUS_CODE=` echo $CURL_RESULT | grep 'statusCode' | sed -e 's/^.*[statusCode=]//g' -e 's/".*//g'`
+    STATUS_CODE=` echo $CURL_RESULT | grep 'statusCode' | sed -e 's/^.*[statusCode=]//g' -e 's/\".*//g'`
     case $STATUS_CODE in
         1) echo "You are already logged in.";;
             # u are already logged in.
