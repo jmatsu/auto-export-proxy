@@ -20,7 +20,7 @@ Airportを使って現在のSSIDを読み取り、予め入力しておいたpro
 		* titech-pubnet.fnc (titech-pubnet用)
 	- resources
 		* defaults.resource (共有変数 eg... デフォルトのネット環境名)
-		* unique.resource (独自変数 eg... titech-pubnet用)
+		* unique.templete (独自変数 eg... titech-pubnet用)
 	- settings
 		* settings_templete (プロキシ設定用のテンプレ)
 		* default_proxy.settings (デフォルトのプロキシ設定)
@@ -29,13 +29,14 @@ Airportを使って現在のSSIDを読み取り、予め入力しておいたpro
 
 ### 使い方
 
-東工大生ならネットワーク環境の生成といくつかの修正が必要
+東工大生ならネットワーク環境の生成といくつかの修正が必要になる
 
 1. titech-pubnet用のネットワーク環境の生成(https://gist.github.com/jmatsu/99ebc9b8707b5277de1e)
 1. $ cd /path/to/auto-export-proxy
-1. $ $EDITOR resources/unique.resource
+1. $ $EDITOR resources/unique.resource.templete
+1. $ cp -a resources/unique.templete resources/unique.resource
 
-全員に必要
+全員がやらなきゃいけないこと
 
 1. $ cd /path/to/auto-export-proxy
 1. $ ./build

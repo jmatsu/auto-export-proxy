@@ -19,7 +19,7 @@ This read current SSID from Airport and export proxy settings from {SSID}.
 		* titech-pubnet.fnc (functions for titech-pubnet)
 	- resources
 		* defaults.resource (shared resource. eg... the name of default network enviroment)
-		* unique.resource (unique resource. eg... your variables.)
+		* unique.templete (unique resource. eg... your variables.)
 	- settings
 		* settings_templete (templete for proxy settings.)
 		* default_proxy.settings (default proxy settings.)
@@ -31,7 +31,8 @@ If you are a student of Tokyo Institute of Technology and would like to use this
 
 1. Create a network environment for titech-pubnet.
 1. $ cd /path/to/auto-export-proxy
-1. $ $EDITOR resources/unique.resource
+1. $ $EDITOR resources/unique.resource.templete
+1. $ cp -a resources/unique.templete resources/unique.resource
 
 For all users.
 
