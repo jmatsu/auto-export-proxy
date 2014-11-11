@@ -1,8 +1,7 @@
 SSID_NAME=`$AIRPORT_COMMAND -I | grep '\ SSID' | awk '{print $2}'`
 
-show_ssid()
-{
-	echo "$SSID_NAME"
+has_ip(){
+    return [ `ifconfig en0|grep "inet [0-9]"|wc -l` = 1 ]
 }
 
 equals_ssid()

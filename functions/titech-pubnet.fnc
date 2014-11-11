@@ -1,10 +1,25 @@
 post_export()
 {
+    scselect $TITECH_NETWORK_ENV
+
+    local _count = 0
+    while :
+    do
+        has_ip && break
+        sleep 100
+        _count=`expr ${_count} + 1`
+        if [ $_count gt 6 ]; then
+            echo 'IP address missing.'
+            exit 0
+            return
+        fi
+    done
+
     TP_LOGIN_URL="https://wlanauth.noc.titech.ac.jp/login.html"
 
     # login
     CURL_RESULT=$(curl $TP_LOGIN_URL -X POST -d buttonClicked=4 -d "username=${TITECH_STUDENT_ID}&password=${TITECH_PASSWORD}" 2>&1)
-    # parse 
+    # parse
     STATUS_CODE=` echo $CURL_RESULT | grep 'statusCode' | sed -e 's/^.*[statusCode=]//g' -e 's/\".*//g'`
     case $STATUS_CODE in
         1) echo "You are already logged in.";;
@@ -17,9 +32,9 @@ post_export()
             # ur account has been excluded.
         5) echo "Invalid your account. Rewrite your information.";;
             # invalid username and TITECH_PASSWORD.
-        *) echo "Auto log-in is successful.";; # break 
+        *) echo "Auto log-in is successful."
+           SWITCH_WIFI off
+           SWITCH_WIFI on;; # break
            # no session. successful
     esac
-
-    scselect $TITECH_NETWORK_ENV
 }

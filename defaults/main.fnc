@@ -1,5 +1,3 @@
-SSID_NAME=`show_ssid`
-
 SSID_ESCAPED=`echo $SSID_NAME | sed -e 's/-/_/g'`
 
 if ! type "export_$SSID_ESCAPED" >/dev/null 2>&1; then
