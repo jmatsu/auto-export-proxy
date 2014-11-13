@@ -5,8 +5,9 @@
 # Copyright (c) 2014 Matsuda Jumpei(https://github.com/jmatsu)
 # Name: auto-handle-nw.sh
 # License: MIT LICENSE
-# Discription: For students of Tokyo Institute of Technology.
+# Description: 
 #              This script can automatically log in and export proxy-settings on Mac OS X.
+#              In particular, for students of Tokyo Institute of Technology. 
 
 ## ===== Information.e =====
 
