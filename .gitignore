@@ -1,5 +1,4 @@
 .DS_Store*
 \#*
 *~
-auto-export-proxy.sh
-unique.resource
+other-export.sh

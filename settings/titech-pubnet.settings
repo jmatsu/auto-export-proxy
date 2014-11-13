@@ -1,3 +1,0 @@
-http_proxy http://proxy.noc.titech.ac.jp:3128
-https_proxy http://proxy.noc.titech.ac.jp:3128
-ALL_PROXY http://proxy.noc.titech.ac.jp:3128

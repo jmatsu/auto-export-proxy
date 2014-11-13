@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+DEFAULT_ENV_NAME="Automatic" # Name of network environment. (日本語設定だと自動と同義)
+
+TITECH_STUDENT_ID='student id' # Require to configure /[0-9]{2}[BMD][0-9]{5}/
+TITECH_PASSWORD='password' # Require to configure
+
+TITECH_NETWORK_ENV='Titech' # Require to configure (The name of network environment for titech-pubnet)
