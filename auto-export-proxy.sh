@@ -100,7 +100,7 @@ export_titech_pubnet()
 
 run_main()
 {
-    local SSID_NAME=get_ssid
+    local SSID_NAME=`get_ssid`
     local SSID_ESCAPED=`echo $SSID_NAME | sed -e 's/-/_/g'`
 
     if ! type "export_${SSID_ESCAPED}" >/dev/null 2>&1; then
