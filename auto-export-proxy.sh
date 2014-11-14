@@ -5,9 +5,9 @@
 # Copyright (c) 2014 Matsuda Jumpei(https://github.com/jmatsu)
 # Name: auto-handle-nw.sh
 # License: MIT LICENSE
-# Description: 
+# Description:
 #              This script can automatically log in and export proxy-settings on Mac OS X.
-#              In particular, for students of Tokyo Institute of Technology. 
+#              In particular, for students of Tokyo Institute of Technology.
 
 ## ===== Information.e =====
 
@@ -118,12 +118,11 @@ run_main()
     echo "Done. Please wait a moment."
 }
 
-_SCRIPT_LOCATION="$(cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
-
+_SCRIPT_LOCATION="$(builtin cd "$(dirname "${BASH_SOURCE:-${(%):-%N}}")"; pwd)"
 _RESOURCES_LOCATION="${_SCRIPT_LOCATION}/resources"
 _OTHER_EXPORT_LOCATION="${_SCRIPT_LOCATION}/other-export.sh"
 
-[ -f ${_RESOURCES_LOCATION} ] && . ${_RESOURCES_LOCATION}
-[ -f ${_OTHER_EXPORT_LOCATION} ] && . ${_OTHER_EXPORT_LOCATION}
+[ -f ${_RESOURCES_LOCATION} ] && . ${_RESOURCES_LOCATION} && echo 'Load resources.'
+[ -f ${_OTHER_EXPORT_LOCATION} ] && . ${_OTHER_EXPORT_LOCATION} && echo 'Load other-export.'
 
 run_main
