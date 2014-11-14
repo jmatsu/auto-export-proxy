@@ -3,7 +3,7 @@
 ## ===== Information.s =====
 
 # Copyright (c) 2014 Matsuda Jumpei(https://github.com/jmatsu)
-# Name: auto-handle-nw.sh
+# Name: auto-export-proxy.sh
 # License: MIT LICENSE
 # Description:
 #              This script can automatically log in and export proxy-settings on Mac OS X.
