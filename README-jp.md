@@ -16,8 +16,6 @@ Airportを使って現在のSSIDを読み取り、予め入力しておいたpro
 
 	[ -f /path/to/auto-export-proxy.sh ] && source /path/to/auto-export-proxy.sh
 
-#### 【注意】./buildは設定を変えたら毎回走らせること
-
 ### 機能拡張
 
 sample-export.shのフォーマットに沿って編集，other-export.shという名前に変更してください
