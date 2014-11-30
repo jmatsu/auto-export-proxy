@@ -28,6 +28,7 @@ wait_for_assigning_ip()
     while :
     do
         [ `ifconfig en0|grep "inet "|wc -l` = 1 ] && break # half space after "inet" is very important
+        echo 'Retry after 2 seconds...'
         sleep 2
         _count=`expr ${_count} + 1`
         if [ $_count gt 6 ]; then
@@ -40,24 +41,13 @@ wait_for_assigning_ip()
     return true
 }
 
-default_proxy_post_export()
+authorize_titech()
 {
-    scselect $DEFAULT_ENV_NAME
-}
-
-titech_pubnet_post_export()
-{
-    scselect $TITECH_NETWORK_ENV
-
-    if wait_for_assigning_ip; then
-        echo 'Start authorization'
-
         local TP_LOGIN_URL="https://wlanauth.noc.titech.ac.jp/login.html"
 
         # login
         _CURL_RESULT=$(curl $TP_LOGIN_URL -X POST -d buttonClicked=4 -d "username=${TITECH_STUDENT_ID}&password=${TITECH_PASSWORD}" 2>&1)
 
-        # parse
         local STATUS_CODE=` echo $CURL_RESULT | grep 'statusCode' | sed -e 's/^.*[statusCode=]//g' -e 's/\".*//g'`
 
         case $STATUS_CODE in
@@ -71,16 +61,39 @@ titech_pubnet_post_export()
                 # ur account has been excluded.
             5) echo "Invalid your account. Rewrite your information.";;
                 # invalid username and TITECH_PASSWORD.
-            *) echo "Auto log-in may be successful. (No error status code was returned)"
-                # wifi off -> on (There is a case which needs to reboot wifi)
-                echo 'Reboot wifi'
-
-                wifi_switch off
-
-                sleep 3
-
-                wifi_switch on;;
+            *) echo "No error status code was returned"
+                return true;;
         esac
+
+        return false;
+}
+
+default_proxy_post_export()
+{
+    scselect $DEFAULT_ENV_NAME
+}
+
+titech_pubnet_post_export()
+{
+    scselect $TITECH_NETWORK_ENV
+
+    if wait_for_assigning_ip; then
+        echo 'Now authorizing...'
+
+        if authorize_titech; then
+            # wifi off -> on (There is a case which needs to reboot wifi)
+            echo 'Reboot wifi'
+            wifi_switch off
+            wifi_switch on
+            sleep 4
+
+            echo 'Retry the authorization for checking...'
+            if authorize_titech; then
+                echo 'Auto log-in is successful.'
+            else
+                echo 'Auto log-in is failure.'
+            fi
+        fi
     fi
 }
 
