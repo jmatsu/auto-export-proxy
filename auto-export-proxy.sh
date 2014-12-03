@@ -75,7 +75,10 @@ default_proxy_post_export()
 
 titech_pubnet_post_export()
 {
-    scselect $TITECH_NETWORK_ENV
+    if [ `scselect | grep '\*' | grep "${TITECH_NETWORK_ENV}" | wc -l` = 0 ]; then
+        scselect $TITECH_NETWORK_ENV
+        sleep 4
+    fi
 
     if wait_for_assigning_ip; then
         echo 'Now authorizing...'
