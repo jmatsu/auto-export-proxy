@@ -31,7 +31,7 @@ wait_for_assigning_ip()
         echo 'Retry after 2 seconds...'
         sleep 2
         _count=`expr ${_count} + 1`
-        if [ $_count gt 6 ]; then
+        if [ $_count -gt 6 ]; then
             echo 'Maybe, assigning ip address is failure.'
             return false
         fi
@@ -102,9 +102,12 @@ titech_pubnet_post_export()
 
 export_default_proxy()
 {
-    export http_proxy=
-    export https_proxy=
-    export ALL_PROXY=
+    # export http_proxy=hogehoge
+    # export https_proxy=hogehoge
+    # export ALL_PROXY=hogehoge
+    unset http_proxy
+    unset https_proxy
+    unset ALL_PROXY
 }
 
 export_titech_pubnet()
@@ -112,7 +115,7 @@ export_titech_pubnet()
     local PROXY_ADDRESS="http://proxy.noc.titech.ac.jp:3128"
     export http_proxy=${PROXY_ADDRESS}
     export https_proxy=${PROXY_ADDRESS}
-    export ALL_PROXY=${PROXY_ADDRESS}
+    export ALL_PROXY=${PROXY_ADDRESS}s
 }
 
 run_main()
