@@ -9,7 +9,7 @@
 function atproxy() {
   export no_proxy="localhost, wlanauth.noc.titech.ac.jp"
 
-  echo "Current ssid is `${atproxy_location}/encapsulated_functions show_ssid`"
+  echo "Current ssid is `${atproxy_location}/encapsulated_functions.sh show_ssid`"
 
   local escaped=`${atproxy_location}/encapsulated_functions.sh "show_escaped_ssid"`
 
