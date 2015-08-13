@@ -9,18 +9,22 @@
 function atproxy() {
   export no_proxy="localhost, wlanauth.noc.titech.ac.jp"
 
-  echo "Current SSID is `./encapsulated_functions show_ssid`"
+  echo "Current ssid is `${atproxy_location}/encapsulated_functions show_ssid`"
 
-  local escaped=`./encapsulated_functions.sh "show_escaped_ssid"`
+  local escaped=`${atproxy_location}/encapsulated_functions.sh "show_escaped_ssid"`
 
   local line
   while read line; do
     eval "$line"
-  done < <(./encapsulated_functions.sh "export_${escaped}")
+  done < <(${atproxy_location}/encapsulated_functions.sh "export_${escaped}")
   
-  ./encapsulated_functions.sh "${escaped}_post_export"
+  ${atproxy_location}/encapsulated_functions.sh "${escaped}_post_export"
 
   echo "Finished. please wait a moment."
 }
 
+atproxy_location=`dirname $0`
+
 atproxy
+
+unset atproxy_location
