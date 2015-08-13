@@ -1,22 +1,24 @@
-#!/usr/bin/env bash
+# change network environment if ssid is "foo"
+function foo_post_export() {
+  # The name of network environment
+  local env_name="FOO"
 
-# if SSID is "hoge"
-hoge_post_export()
-{
-    # The name of network environment
-    local HOGE_ENV_NAME="HOGE"
+  scselect "${env_name}"
 
-    scselect $HOGE_ENV_NAME
-
-    if wait_for_assigning_ip; then
-
-    fi
+  if is_ip_assigned; then
+    :
+  fi
 }
 
-export_hoge()
-{
-    local PROXY_ADDRESS="http://hoge.com"
-    export http_proxy=${PROXY_ADDRESS}
-    export https_proxy=${PROXY_ADDRESS}
-    export ALL_PROXY=${PROXY_ADDRESS}
+# echo export properties if ssid is foo
+function export_foo() {
+  local proxy_addr="http://foo.com"
+  echo "export http_proxy=${proxy_addr}"
+  echo "export https_proxy=${proxy_addr}"
+  echo "export ALL_PROXY=${proxy_addr}"
+}
+
+# process things which you would like to do after calling export_foo
+function foo_post_export() {
+  :
 }
