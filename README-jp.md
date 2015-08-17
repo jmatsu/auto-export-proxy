@@ -1,9 +1,13 @@
-auto-export-proxy
+atproxy
 ========================
 
-OSX上で簡単にproxy設定を行うスクリプトです。
+MacOSX上で簡単にproxy設定を行うスクリプト
 
-Airportを使って現在のSSIDを読み取り、予め入力しておいたproxy設定をexportします。
+予めproxyの値等を設定しておくことで動的に設定値を読み込む．
+
+### 使い方
+
+sample-export.shのフォーマットに沿って編集したのち，other-export.shという名前に変更する
 
 ### 使い方
 
@@ -15,7 +19,3 @@ Airportを使って現在のSSIDを読み取り、予め入力しておいたpro
 いつも使ってるシェルの設定ファイルに次の文を追加
 
 	[ -f /path/to/auto-export-proxy.sh ] && source /path/to/auto-export-proxy.sh
-
-### 機能拡張
-
-sample-export.shのフォーマットに沿って編集，other-export.shという名前に変更してください

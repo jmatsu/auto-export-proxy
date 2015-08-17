@@ -18,7 +18,7 @@ function is_ip_assigned() {
     sleep 2
   done
 
-  [ `ifconfig en0|grep "inet "|wc -l` = 1 ] && return true || return false
+  [ `ifconfig en0|grep "inet "|wc -l` = 1 ] && return 0 || return 1
 }
 
 function authorize_titech() {
@@ -41,11 +41,11 @@ function authorize_titech() {
       5) echo "Invalid your account. Rewrite your information.";;
           # invalid username and TITECH_PASSWORD.
       *) echo "No error status code was returned"
-          return true
+          return 0
           ;;
   esac
 
-  return false
+  return 1
 }
 
 function default_proxy_post_export() {
